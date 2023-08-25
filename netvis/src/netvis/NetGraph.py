@@ -97,12 +97,18 @@ class NetGraph:
             title2 = "AS Number unavailable"
 
             if (Ip in self.source["Src_ip"].values.tolist()):  
-                if not (-1 in self.mp):
+                if not (-2 in self.mp):
                     c = self.generate_color()
                     self.color[c] = "Source"
-                    self.mp[-1] = c  
+                    self.mp[-2] = c  
                     
-                net.add_node(Ip,shape="square",title="Source",color=self.mp[-1], physics=False)
+                net.add_node(Ip,shape="square",title="Source",color=self.mp[-2], physics=False)
+            elif (Ip in self.destinations):
+                if not (-1 in self.mp):
+                    c = self.generate_color()
+                    self.color[c] = "Destination"
+                    self.mp[-1] = c 
+                net.add_node(Ip,shape="triangle",title="destiantion",color=self.mp[-1], physics=False)
             elif (Asn == 0):
                 if not(0 in self.mp):
                     c = self.generate_color()
